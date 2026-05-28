@@ -1,0 +1,22 @@
+services:
+  openvpn:
+    image: vpn_openvpn
+    build: .
+    ports:
+#      - "1080:1080"
+      - "32${HOST_PORT_SUFIX_DEV}:3201"
+      - "32${HOST_PORT_SUFIX_QAS}:3202"
+      - "32${HOST_PORT_SUFIX_PRD}:3203"
+      - "33${HOST_PORT_SUFIX_DEV}:3301"
+      - "33${HOST_PORT_SUFIX_QAS}:3302"
+      - "33${HOST_PORT_SUFIX_PRD}:3303"
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - "./entrypoint.sh:/entrypoint.sh"
+      - "./myconf:/myconf"
+    env_file:
+      - .env
+    restart: unless-stopped
