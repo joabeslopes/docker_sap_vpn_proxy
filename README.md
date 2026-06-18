@@ -13,7 +13,7 @@ O funcionamento é bem simples: ele redireciona uma porta do host para um IP e p
 
 Geralmente toda empresa possui ao menos 3 ambientes: DEV, QAS e PRD, e as configurações dos containers são baseadas nesse princípio.
 
-O acesso direto a um ambiente SAP (independente se for ECC ou S4HANA) acontece sempre através da porta 32<instancia> (exemplo: servidor DEV, ip 10.0.0.5, numero de instancia 01, o acesso vai ser nesse ip com a porta 3201).
+O acesso direto a um ambiente SAP (independente se for ECC ou S4HANA) acontece sempre através da porta 32\<instancia\> (exemplo: servidor DEV, ip 10.0.0.5, numero de instancia 01, o acesso vai ser nesse ip com a porta 3201).
 
 Então a ideia é rodar esses containers em um host centralizado, e configurar o SAP GUI (ou Eclipse) para acessar o IP desse host (exemplo: 192.168.0.10), que vai estar escutando na porta externa 32XX, onde XX é o número que você quiser. Nas configurações você define para onde essa porta vai direcionar.
 
