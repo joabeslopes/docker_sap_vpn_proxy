@@ -1,0 +1,22 @@
+services:
+  strongswan:
+    image: vpn_strongswan
+    build: .
+    ports:
+      - "32${HOST_PORT_SUFIX_DEV}:3201"
+      - "32${HOST_PORT_SUFIX_QAS}:3202"
+      - "32${HOST_PORT_SUFIX_PRD}:3203"
+      - "33${HOST_PORT_SUFIX_DEV}:3301"
+      - "33${HOST_PORT_SUFIX_QAS}:3302"
+      - "33${HOST_PORT_SUFIX_PRD}:3303"
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - "./entrypoint.sh:/entrypoint.sh"
+      - "./swanctl.conf:/etc/swanctl/swanctl.conf"
+    env_file:
+      - .env
+    restart: unless-stopped
